@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template
 import pandas as pd
-import pickle
+import joblib  # Cambiado de pickle a joblib
 
 app = Flask(__name__)
 
@@ -20,9 +20,8 @@ columnas = [
     "estado_Yucatán", "estado_Zacatecas"
 ]
 
-# Cargar modelo entrenado
-with open("ModeloRegresionlineal_Poblacion_por_estado_en_año.pkl", "rb") as f:
-    modelo = pickle.load(f)
+# Cargar modelo entrenado con joblib
+modelo = joblib.load("modelo1.joblib")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
